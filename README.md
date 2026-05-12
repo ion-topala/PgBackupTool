@@ -21,35 +21,9 @@ dotnet build PgBackupTool
 dotnet run --project PgBackupTool
 ```
 
-Or open `PgBackupTool.slnx` in Visual Studio 2022+.
-
-## Publish as a standalone EXE
-
-The commands below produce a single self-contained executable that runs on any Windows machine **without requiring .NET to be installed**.
-
-### Single-file, self-contained (recommended for distribution)
-
-```
-dotnet publish PgBackupTool -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o publish/win-x64
-```
-
-Output: `publish/win-x64/PgBackupTool.exe` (~130 MB, no dependencies).
-
-> **Note:** PostgreSQL client tools (`pg_dump` etc.) still need to be on `PATH` on the target machine — they are not bundled.
-
-### Framework-dependent (smaller, requires .NET 10 Runtime on target)
-
-```
-dotnet publish PgBackupTool -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true -o publish/win-x64-fdd
-```
-
-Output: ~3 MB. Target machine needs [.NET 10 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/10.0).
-
----
-
 ## Create an installer
 
-### Option A — Inno Setup (recommended, free)
+### Inno Setup
 
 1. Download and install [Inno Setup 6](https://jrsoftware.org/isdl.php).
 2. Use the `installer.iss`
